@@ -10,11 +10,13 @@
 
 ## 二、安装gitlab
 下载镜像：docker pull gitlab/gitlab-ce:13.1.4-ce.0  
+
 启动：  
 docker run -d  -p 8443:443 -p 8181:80 -p 222:22 --name gitlab --restart always -v /home/gitlab/config:/etc/gitlab -v /home/gitlab/logs:/var/log/gitlab -v /home/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce:13.1.4-ce.0  
 
 vim /home/gitlab/config/gitlab.rb  
-配置http协议所使用的访问地址,不加端口号默认为80  
+
+//配置http协议所使用的访问地址,不加端口号默认为80  
 external_url 'http://192.168.199.231'  
  
 配置ssh协议所使用的访问地址和端口  
@@ -26,6 +28,7 @@ gitlab-ctl stop prometheus
 
 ## 三、安装jenkins  
 下载镜像：docker pull jenkins/jenkins:2.235.2-lts-centos7  
+
 启动：   
 docker run -d -p 8080:8080 -p 50000:50000 -v /home/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /etc/docker:/etc/docker --name jenkins --restart always --privileged=true  -u root jenkins/jenkins:2.235.2-lts-centos7  
 
@@ -53,11 +56,13 @@ Blue Ocean 流水线配置 （单元测试）
 
 ## 四、启动Mysql镜像  
 docker pull mysql:5.7.31  
+
 启动：   
 docker run -d --name mysql --restart always -p 3306:3306 -v /home/mysql/mysql:/var/lib/mysql -v /home/mysql/conf:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.31  
 
 ## 五、启动mile-api镜像  
 jenkins自动构建-开发版本  
+
 启动：  
 docker run -d -p 80:9001 --name mile-api --restart always --privileged=true mile-api:dev  
 
@@ -67,11 +72,14 @@ docker run -d -p 80:9001 --name mile-api --restart always --privileged=true mile
 ## 七、安装Docker私有仓库 http://192.168.6.211:8282/
 harbor.v1.10.1.tar.gz  
 ./install.sh  
+
 登陆私有仓库：  
 docker login 192.168.6.211:8282  
+
 推送私有仓库：  
 docker tag mile-api:1.0 192.168.6.211:8282/oa/mile-api:1.0  
 docker push 192.168.6.211:8282/oa/mile-api:1.0  
+
 拉取私有仓库：  
 docker pull 192.168.6.211:8282/oa/mile-api:1.0  
 

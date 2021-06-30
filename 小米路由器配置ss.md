@@ -63,7 +63,7 @@ soa=localhost,root.localhost,42,86400,900,86400,86400;
 
 DNS加强：DNS重定向，关闭  
 
-恭喜完成！  
+## 恭喜完成！  
 
 参考：
 测试DNS解析：nslookup www.baidu.com  
